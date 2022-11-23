@@ -9,6 +9,9 @@ Projeto utilizando Javascript, Bootstrape Chart.js
 ![projeto taxa selic grafico](https://user-images.githubusercontent.com/30128774/203454361-98af184d-5391-4898-a2aa-ef3b5c079733.gif)
 
 
+### Acesse o projeto online:
+https://t3pr0j.csb.app/
+
 
 ## Api Utilizada
 
@@ -20,6 +23,5 @@ Parametros:
 2. ``?formato=json ``retorna a estrutura do resposta da api (pode ser em json,csv)
 3. ``?dataInicial`` e ``?dataFinal ``  define a data da taxa selic a ser consultada
 
-
-### Acesse o projeto online:
-https://t3pr0j.csb.app/
+### Links importantes 
+1. Procurar por mais códigos para consultar da api: https://www3.bcb.gov.br/sgspub/localizarseries/localizarSeries.do?method=prepararTelaLocalizarSeries
