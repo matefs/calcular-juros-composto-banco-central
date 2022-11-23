@@ -1,7 +1,7 @@
 #  Calcular juros composto com a taxa SELIC
 
 Projeto para calcular o juro composto com base na taxa SELIC consultada na API do banco central do Brasil, trazendo a taxa definida nos últimos 45 dias.
-Projeto utilizando Javascript, Bootstrap (https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css) e Chart.js (https://cdn.jsdelivr.net/npm/chart.js)
+Projeto utilizando Javascript, Bootstrape Chart.js  
 
 
 
