@@ -4,6 +4,12 @@ Projeto para calcular o juro composto com base na taxa SELIC consultada na API d
 Projeto utilizando Javascript, Bootstrap (https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css) e Chart.js (https://cdn.jsdelivr.net/npm/chart.js)
 
 
+
+### Imagens do projeto: 
+![projeto taxa selic grafico](https://user-images.githubusercontent.com/30128774/203454361-98af184d-5391-4898-a2aa-ef3b5c079733.gif)
+
+
+
 ## Api Utilizada
 
 Segue a url do banco central utilizada para consultar a taxa selic do último mês:
@@ -17,5 +23,3 @@ Parametros:
 
 ### Acesse o projeto online:
 https://t3pr0j.csb.app/
-
-### Imagens do projeto: 
