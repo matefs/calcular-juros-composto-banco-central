@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" defer>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>  
+  <title>See the investment return </title>
+</head>
+<body>
+
+  
+<div class='container'>
+  <span>Write the intial value to see the compound interest by next 5 years based on Brazilian selic rate </span>
+  <input type="number" class='input' min="1" max="99999999"  id="investmentInicialValue">
+  <button onclick="createNewChart()" class='btn btn-dark'>Calculate</button>
+  <canvas id="myChart"></canvas>
+</div>
+
+<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+  <div class="col-md-4 d-flex align-items-center">
+    <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+      <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
+    </a>
+    <span class="mb-3 mb-md-0 text-muted">© Mateus Schverz</span>
+  </div>
+
+  <ul class="nav col-md-6 justify-content-end list-unstyled d-flex"> 
+    <li class="ms-3"><a class="text-muted" href="https://www.instagram.com/mateus.schv/"> Instagram</a></li> 
+  </ul>
+</footer>
+  
+</body>
+</html>
+
+
+
+
+
+  <script>
+
+ 
+
+  var initialValueInvested = 10000;
+  var currentValueInvested = 10000;
+  // var interestSelicRateByYear = 13.75 * 0.01; // 13.75 
+  const currentYear = new Date().getUTCFullYear();
+  const todayDateString = new Date().toLocaleDateString()
+  const currentMonth =  todayDateString.slice(3,5) *1;
+  const annualInterestSelicRateCode = 1178;
+  var calculatedValuesArray = [2, 9, 3, 5, 2, 3]
+  var yearsInvestedArray = [currentYear+1,
+  currentYear+2,
+  currentYear+3,
+  currentYear+4,
+  currentYear+5, ]
+
+
+  var selicRateFromApi;
+
+  console.log(currentYear, currentMonth)
+  console.log(todayDateString)
+  
+  fetch(` 
+https://api.bcb.gov.br/dados/serie/bcdata.sgs.1178
+/dados?formato=json&dataInicial=
+01/${currentMonth}/${currentYear}&
+dataFinal=${todayDateString}
+`) 
+    .then(retorno => { return retorno.json()} )
+    .then(data => { 
+    selicRateFromApi = (data.pop().valor * 1 ) * 0.01
+  })
+  .then(() => {  
+    console.log(selicRateFromApi)
+
+
+
+    for (item = 0 ; item<calculatedValuesArray.length;item++){
+    currentValueInvested = (currentValueInvested * selicRateFromApi) + currentValueInvested;   
+    calculatedValuesArray[item] = Math.floor(currentValueInvested);
+    console.log(item, calculatedValuesArray)
+
+    }  
+ 
+    calculatedValuesArray.unshift(initialValueInvested)
+    yearsInvestedArray.unshift(currentYear)
+
+
+    
+  const ctx = document.getElementById('myChart');
+
+
+  new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: yearsInvestedArray,
+    datasets: [{
+      label: '# result of values per year',
+      data: calculatedValuesArray,
+      borderWidth: 1
+    }]
+  },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  }
+}); 
+
+
+
+  })
+
+ 
+
+
+ 
+   
+
+
+  function createNewChart(){
+  
+     
+
+
+
+
+  const lastCanvasCreated = document.querySelector('canvas')
+  if(lastCanvasCreated) { 
+    lastCanvasCreated.remove();
+    console.log('Old canvas removed')
+   }
+
+
+  
+  var newCanvas = document.createElement('canvas');
+  newCanvas.id = "myChart";
+  document.querySelector("body > div.container").appendChild(newCanvas);
+
+  
+  var intialValueInvestedInput = document.querySelector('#investmentInicialValue').value * 1;
+  console.log(intialValueInvestedInput)
+  currentValueInvested = intialValueInvestedInput;
+  
+  calculatedValuesArray.shift()
+  yearsInvestedArray.shift()
+    
+
+  for (item = 0 ; item<calculatedValuesArray.length;item++){
+    currentValueInvested = (currentValueInvested * selicRateFromApi) + currentValueInvested;   
+    calculatedValuesArray[item] = Math.floor(currentValueInvested);
+    console.log(item, calculatedValuesArray)
+
+    } 
+
+     
+    
+    calculatedValuesArray.unshift(intialValueInvestedInput)
+    yearsInvestedArray.unshift(currentYear)
+
+
+
+
+  const ctx = document.getElementById('myChart');
+
+
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: yearsInvestedArray,
+      datasets: [{
+        label: '# result of values per year',
+        data: calculatedValuesArray,
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+}
+    
+  </script>
+
+
+
+ 
