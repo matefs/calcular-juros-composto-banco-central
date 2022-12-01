@@ -12,6 +12,7 @@
 
   
 <div class='container'>
+  <h1 id="currentSelicRateH1"></h1>
   <span>Write the intial value to see the compound interest by next 5 years based on Brazilian selic rate </span>
   <input type="number" class='input' min="1" max="99999999"  id="investmentInicialValue">
   <button onclick="createNewChart()" class='btn btn-dark'>Calculate</button>
@@ -70,11 +71,12 @@ dataFinal=${todayDateString}
 `) 
     .then(retorno => { return retorno.json()} )
     .then(data => { 
+      console.log(data.valor)
     selicRateFromApi = (data.pop().valor * 1 ) * 0.01
   })
   .then(() => {  
     console.log(selicRateFromApi)
-
+    document.getElementById("currentSelicRateH1").innerHTML = "Current selic rate:   " + selicRateFromApi*100 + "% per year";
 
 
     for (item = 0 ; item<calculatedValuesArray.length;item++){
