@@ -9,7 +9,7 @@ Projeto utilizando Javascript, Bootstrape Chart.js.
 
 
 # Acesse o projeto online: 👇
-https://w97tkz.csb.app/
+https://lbfih9.csb.app/
 
 ## Api Utilizada
 
