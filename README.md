@@ -9,10 +9,10 @@ Projeto utilizando Javascript, Bootstrape Chart.js.
 
 
 # Acesse o projeto online: 👇
-https://lbfih9.csb.app/
+https://TAXA-SELIC.mateusschverz.repl.co
+
 
 ## Api Utilizada
-
 Segue a url do banco central utilizada para consultar a taxa selic do último mês:
 `` https://api.bcb.gov.br/dados/serie/bcdata.sgs.11/dados?formato=json&dataInicial=01/01/2022&dataFinal=31/12/2022 ``
 
