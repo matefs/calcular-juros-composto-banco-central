@@ -7,42 +7,60 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" defer>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>  
   <title>See the investment return </title>
+
+  <style>
+    @media (max-width: 768px) {
+  img#loadingImage {
+    width: 100px;
+    height: 100px;
+    margin-left:35% !important;
+  }
+}
+
+@media (min-width: 768px) {
+  img#loadingImage {
+    width: 200px;
+    height: 200px;
+  }
+}
+  </style>
 </head>
 <body>
 
+
   
+
 <div class='container'>
+
   <h1 id="currentSelicRateH1"></h1>
   <span>Write the initial value to see the compound interest by next 5 years based on Brazilian selic rate </span>
   <input type="number" class='input' min="1" max="99999999"  id="investmentInicialValue">
   <button onclick="createNewChart()" class='btn btn-dark'>Calculate</button>
   <canvas id="myChart"></canvas>
+  
+  <img id="loadingImage" src="loading.gif" alt="Loading..." style="display:block; margin-left:37%; max-width:300px; position:absolute;">
 </div>
-
+ 
+  
 <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
   <div class="col-md-4 d-flex align-items-center">
     <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
       <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
     </a>
-    <span class="mb-3 mb-md-0 text-muted">© Mateus Schverz</span>
-  </div>
-
-  <ul class="nav col-md-6 justify-content-end list-unstyled d-flex"> 
-    <li class="ms-3"><a class="text-muted" href="https://www.instagram.com/mateus.schv/"> Instagram</a></li> 
+    <span class="mb-3 mb-md-0 text-muted">© Mateus Schverz  | <a class="text-muted" href="https://www.instagram.com/mateus.schv/"> Instagram</a> </span>
+ 
   </ul>
+
+</div>
+
+
 </footer>
   
 </body>
 </html>
 
 
-
-
-
   <script>
-
- 
-
   var initialValueInvested = 10000;
   var currentValueInvested = 10000;
   // var interestSelicRateByYear = 13.75 * 0.01; // 13.75 
@@ -57,8 +75,8 @@
   currentYear+4,
   currentYear+5, ]
 
-
   var selicRateFromApi;
+  var estaCarregado = false;
 
   console.log(currentYear, currentMonth)
   console.log(todayDateString)
@@ -71,13 +89,14 @@ dataFinal=${todayDateString}
 `) 
     .then(retorno => { return retorno.json()} )
     .then(data => { 
-      console.log(data.valor)
+    console.log(data.valor)
     selicRateFromApi = (data.pop().valor * 1 ) * 0.01
   })
   .then(() => {  
     console.log(selicRateFromApi)
     document.getElementById("currentSelicRateH1").innerHTML = "Current selic rate:   " + selicRateFromApi*100 + "% per year";
 
+    document.getElementById("loadingImage").style.display = "none"; 
 
     for (item = 0 ; item<calculatedValuesArray.length;item++){
     currentValueInvested = (currentValueInvested * selicRateFromApi) + currentValueInvested;   
@@ -85,14 +104,11 @@ dataFinal=${todayDateString}
     console.log(item, calculatedValuesArray)
 
     }  
- 
+
     calculatedValuesArray.unshift(initialValueInvested)
     yearsInvestedArray.unshift(currentYear)
 
-
-    
-  const ctx = document.getElementById('myChart');
-
+    const ctx = document.getElementById('myChart');
 
   new Chart(ctx, {
   type: 'bar',
@@ -117,27 +133,14 @@ dataFinal=${todayDateString}
 
   })
 
- 
-
-
- 
-   
-
 
   function createNewChart(){
-  
-     
-
-
-
 
   const lastCanvasCreated = document.querySelector('canvas')
   if(lastCanvasCreated) { 
     lastCanvasCreated.remove();
     console.log('Old canvas removed')
    }
-
-
   
   var newCanvas = document.createElement('canvas');
   newCanvas.id = "myChart";
@@ -159,18 +162,11 @@ dataFinal=${todayDateString}
 
     } 
 
-     
-    
     calculatedValuesArray.unshift(intialValueInvestedInput)
     yearsInvestedArray.unshift(currentYear)
 
 
-
-
   const ctx = document.getElementById('myChart');
-
-
-
   new Chart(ctx, {
     type: 'bar',
     data: {
@@ -193,6 +189,3 @@ dataFinal=${todayDateString}
     
   </script>
 
-
-
- 
