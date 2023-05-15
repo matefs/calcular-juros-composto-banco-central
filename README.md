@@ -4,7 +4,6 @@ Este repositório contém uma aplicação web que permite calcular o valor final
  
 ![projeto taxa selic grafico](https://user-images.githubusercontent.com/30128774/203454361-98af184d-5391-4898-a2aa-ef3b5c079733.gif)
  
-
 # Acesse o projeto online: 👇
 https://TAXA-SELIC.mateusschverz.repl.co
 ## **Tecnologias utilizadas**
